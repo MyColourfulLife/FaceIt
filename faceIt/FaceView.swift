@@ -12,13 +12,13 @@ import UIKit
 @IBDesignable
 class FaceView: UIView {
     @IBInspectable
-    var scale:CGFloat = 0.9// min 0 max 3
+    var scale:CGFloat = 0.9 {didSet{setNeedsDisplay()}}
     @IBInspectable
-    var eyesOpen:Bool = false
+    var eyesOpen:Bool = false {didSet{setNeedsDisplay()}}
     @IBInspectable
-    var mouthCurvature:Double = 1.0 // 1.0 - -1.0
+    var mouthCurvature:Double = 1.0 {didSet{setNeedsDisplay()}} // 1.0 - -1.0
     @IBInspectable
-    var lineColor:UIColor = UIColor.blue
+    var lineColor:UIColor = UIColor.blue {didSet{setNeedsDisplay()}}
     @IBInspectable
     var lineWidth:CGFloat = 5
     
@@ -30,6 +30,14 @@ class FaceView: UIView {
         return CGPoint(x: bounds.midX, y: bounds.midY)
     }
     
+   @objc func changeScale(byReactingTo pinchRecognizer:UIPinchGestureRecognizer) {
+        switch pinchRecognizer.state {
+        case .changed,.ended:
+            scale *= pinchRecognizer.scale
+            pinchRecognizer.scale = 1
+        default:break
+        }
+    }
 
     private func pathForCircleAtPoint(_ centerPoint:CGPoint, radius:CGFloat)->UIBezierPath {
         let path = UIBezierPath(arcCenter: centerPoint, radius: radius, startAngle: 0, endAngle: CGFloat.pi*2, clockwise: false)

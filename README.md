@@ -13,3 +13,41 @@ CustomView
 3. pay attention to the contentMode, you can set its value to Redraw with code or xib
 
 4. We usually use CGFloat data type when it comes to UI.
+
+---
+
+In the MVC architecture, for those operations that affect the view through the model, usually, the model data is manipulated to update the UI instead of directly manipulating the UI.
+
+There are two sides to using a gesture recognizer
+1. Adding a gesture recognizer to a UIView (asking the UIView to recognize that gesture)
+2. Providing a method to handle that gesture ( not necessary handled by the UIView)
+
+The second is provided either by the UIView or a Contrller depending on the situation
+1. if affect the model , use Controller
+2. if not ,use UIView
+
+```swift
+@IBOutlet weak var faceView: FaceView! {
+    didSet{
+    let handler = #selector(FaceView.changeScale(byReactingTo:))
+    let pinchGesture = UIPinchGestureRecognizer(target: faceView, action: handler)
+    faceView.addGestureRecognizer(pinchGesture)
+    }
+}
+
+@objc func changeScale(byReactingTo pinchRecognizer:UIPinchGestureRecognizer) {
+    switch pinchRecognizer.state {
+    case .changed,.ended:
+    scale *= pinchRecognizer.scale
+    pinchRecognizer.scale = 1
+    default:break
+    }
+}
+```
+The property observers didSet code gets called when iOS hooks up this outlet at runtime
+Here we are creating an instance of a concrete subclass of UIGes tureRecognizer (for pans)
+The target gets notified when the gesture is recognized (here it's the Controller itself)
+The action is the method invoked on recognition (that method's argument? the recognizer)
+Here we ask the UIView to actually start trying to recognize this gesture in its bounds
+
+by reseting the scale to one, the next one we get will be incremental movement, we also reset the translation to CGPoint.zero in the panGesture
