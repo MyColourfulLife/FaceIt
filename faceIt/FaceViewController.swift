@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+class FaceViewController: UIViewController {
     @IBOutlet weak var faceView: FaceView! {
         didSet{
             // scale
@@ -69,9 +69,9 @@ class ViewController: UIViewController {
         case .neutral:
             faceView?.mouthCurvature = 0
         case .smrik:
-            faceView.mouthCurvature = -0.5
+            faceView?.mouthCurvature = -0.5
         case .grin:
-            faceView.mouthCurvature = 0.5
+            faceView?.mouthCurvature = 0.5
         }
     }
     
