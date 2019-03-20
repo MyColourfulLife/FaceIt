@@ -76,5 +76,7 @@ The VIewContoller's life circle:
 
 ---
 Use timer to bling bling
+
 Use animation to open and close your eyes
+
 Use animation to achieve moving head
