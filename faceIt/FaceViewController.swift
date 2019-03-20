@@ -17,7 +17,7 @@ class FaceViewController: UIViewController {
             let pinchGesture = UIPinchGestureRecognizer(target: faceView, action: handler)
             faceView.addGestureRecognizer(pinchGesture)
             // tap
-            let tapGesutre = UITapGestureRecognizer(target: self, action: #selector(tonggleEyes(byReactTo:)))
+            let tapGesutre = UITapGestureRecognizer(target: self, action: #selector(shakeHead))
             tapGesutre.numberOfTapsRequired = 1
             faceView.addGestureRecognizer(tapGesutre)
             // swip
@@ -72,6 +72,27 @@ class FaceViewController: UIViewController {
             faceView?.mouthCurvature = -0.5
         case .grin:
             faceView?.mouthCurvature = 0.5
+        }
+    }
+    
+    private func rotateFace(by angle:CGFloat) {
+        faceView.transform = faceView.transform.rotated(by: angle)
+    }
+    
+    private struct HeadShake {
+        static let angle = CGFloat.pi/6
+        static let segmentDuration:TimeInterval = 0.5
+    }
+    
+  @objc  private func shakeHead(){
+        UIView.animate(withDuration: HeadShake.segmentDuration, animations: {self.rotateFace(by: HeadShake.angle)}) { finished in
+            if finished {
+                UIView.animate(withDuration: HeadShake.segmentDuration, animations: {self.rotateFace(by: HeadShake.angle * -2)}) { finished in
+                    if finished {
+                        UIView.animate(withDuration: HeadShake.segmentDuration, animations: {self.rotateFace(by: HeadShake.angle)})
+                    }
+                }
+            }
         }
     }
     

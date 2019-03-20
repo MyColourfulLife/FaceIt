@@ -74,3 +74,7 @@ The VIewContoller's life circle:
     viewWillLayoutSubviews (... then autolayout happens,then ...)viewDidLayoutSubviews
     you can reset the frames of your subviews here or set other geometry-related properties
 
+---
+Use timer to bling bling
+Use animation to open and close your eyes
+Use animation to achieve moving head
