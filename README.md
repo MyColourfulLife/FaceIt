@@ -78,3 +78,61 @@ The VIewContoller's life circle:
 Use timer to bling bling
 Use animation to open and close your eyes
 Use animation to achieve moving head
+
+---
+- Add emotion editor with static tableView
+- Adapt to iPhone and iPad
+- Use Embed Segue to Embed other Controller's view
+- Calculate the height of the popover controller
+```swift
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // 适配iPad，设置preferredContentSize
+        if let popoverPesentationController = navigationController?.popoverPresentationController,
+            popoverPesentationController.arrowDirection != .unknown {
+            navigationItem.leftBarButtonItem = nil
+            var size = tableView.minimumSize(forSection: 0)
+            size.height -= tableView.heightForRow(at: IndexPath(row: 1, section: 0))
+            size.height += size.width
+            preferredContentSize = size
+        }
+    }
+```
+- Use Unwind segue to pass value backwards
+```swift
+    @IBAction func addEmotionalFace(from segue:UIStoryboardSegue) {
+        if let editor = segue.source as? ExpressionEditorViewController {
+            emotionalFaces.append((editor.name,editor.expression))
+            tableView.reloadData()
+        }
+    }
+```
+- Use should segue method to verify the validity of the input value
+```swift
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "Add Emotion" && name.isEmpty {
+            hanleUnnamedFace()
+            return false
+        }else {
+            return super.shouldPerformSegue(withIdentifier: identifier, sender: sender)
+        }
+    }
+```
+- Use alert to ask user input the emotion name or cancel it
+```swift
+    func hanleUnnamedFace() {
+        let alert = UIAlertController(title: "无效的表情", message: "请输入表情名称", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (action) in
+            if let textFiled = alert.textFields?.first {
+                if let text = textFiled.text, !text.isEmpty {
+                    self.nameTextField?.text = text
+                    self.performSegue(withIdentifier: "Add Emotion", sender: nil)
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: nil))
+        alert.addTextField(configurationHandler: nil)
+        present(alert, animated: true, completion: nil)
+    }
+```
+

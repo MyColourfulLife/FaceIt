@@ -16,6 +16,7 @@
 		F8A37726222D1BFC0082E167 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8A37724222D1BFC0082E167 /* LaunchScreen.storyboard */; };
 		F8A3772F222D1C8B0082E167 /* FaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A3772E222D1C8B0082E167 /* FaceView.swift */; };
 		F8A37732222E81AA0082E167 /* FacialExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A37731222E81AA0082E167 /* FacialExpression.swift */; };
+		F8A59AB1228574F900CCD4CC /* ExpressionEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A59AB0228574F900CCD4CC /* ExpressionEditorViewController.swift */; };
 		F8D98AF2222FA7FB00C3C5C0 /* EmotionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D98AF1222FA7FB00C3C5C0 /* EmotionsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		F8A37727222D1BFC0082E167 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8A3772E222D1C8B0082E167 /* FaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceView.swift; sourceTree = "<group>"; };
 		F8A37731222E81AA0082E167 /* FacialExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacialExpression.swift; sourceTree = "<group>"; };
+		F8A59AB0228574F900CCD4CC /* ExpressionEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionEditorViewController.swift; sourceTree = "<group>"; };
 		F8D98AF1222FA7FB00C3C5C0 /* EmotionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +72,7 @@
 				F8A3772E222D1C8B0082E167 /* FaceView.swift */,
 				F8A37731222E81AA0082E167 /* FacialExpression.swift */,
 				F8D98AF1222FA7FB00C3C5C0 /* EmotionsViewController.swift */,
+				F8A59AB0228574F900CCD4CC /* ExpressionEditorViewController.swift */,
 				F8A3771F222D1BF70082E167 /* Main.storyboard */,
 				F8A37730222D30B30082E167 /* Supporttings */,
 			);
@@ -163,6 +166,7 @@
 				F8A37732222E81AA0082E167 /* FacialExpression.swift in Sources */,
 				F838A08E2241EF5E007E6109 /* BlinkingFaceViewController.swift in Sources */,
 				F8D98AF2222FA7FB00C3C5C0 /* EmotionsViewController.swift in Sources */,
+				F8A59AB1228574F900CCD4CC /* ExpressionEditorViewController.swift in Sources */,
 				F8A3771C222D1BF70082E167 /* AppDelegate.swift in Sources */,
 				F8A3772F222D1C8B0082E167 /* FaceView.swift in Sources */,
 			);

@@ -32,48 +32,39 @@ class FaceViewController: UIViewController {
     }
     
     @objc func tonggleEyes(byReactTo tapGestrue:UITapGestureRecognizer) {
-        let eyes:FacialExpression.Eyes = express.eyes == .open ? .closed : .open
-        express = FacialExpression(eyes: eyes, mouth: express.mouth)
+        let eyes:FacialExpression.Eyes = expression.eyes == .open ? .closed : .open
+        expression = FacialExpression(eyes: eyes, mouth: expression.mouth)
     }
     
-    var express = FacialExpression(eyes:.closed,mouth:.smile) {
+    var expression = FacialExpression(eyes:.closed,mouth:.smile) {
         didSet{
             updateUI()
         }
     }
     
     @objc func happierReactiveToSwipGesture() {
-        express = express.happier
+        expression = expression.happier
     }
     
     @objc func sadderReactiveToSwipGesture() {
-        express = express.sadder
+        expression = expression.sadder
     }
     
     
     func updateUI() {
-        switch express.eyes {
+        switch expression.eyes {
         case .closed:
             faceView?.eyesOpen = false
         case .open:
             faceView?.eyesOpen = true
         case .squinting:
-            faceView.eyesOpen = false
+//            faceView?.eyesOpen = false
+            break
         }
-        
-        switch express.mouth {
-        case .smile:
-            faceView?.mouthCurvature = 1.0
-        case .frown:
-            faceView?.mouthCurvature = -1.0
-        case .neutral:
-            faceView?.mouthCurvature = 0
-        case .smrik:
-            faceView?.mouthCurvature = -0.5
-        case .grin:
-            faceView?.mouthCurvature = 0.5
-        }
+        faceView?.mouthCurvature = mouthCurvatures[expression.mouth] ?? 0.0
     }
+    
+    private let mouthCurvatures:[FacialExpression.Mouth: Double] = [.frown:-1.0,.smrik:-0.5,.neutral:0.0,.grin:0.5,.smile:1.0]
     
     private func rotateFace(by angle:CGFloat) {
         faceView.transform = faceView.transform.rotated(by: angle)
